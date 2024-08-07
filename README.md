@@ -26,6 +26,7 @@ If you don't have `conda` available, we recommend installing [Miniconda for Pyth
 
 Building from source
 --------------------
+### Linux
 
 This plugin uses [CMake](https://cmake.org/) as its build system.  
 Before compiling you must install [LibTorch](https://pytorch.org/cppdocs/installing.html), which is the PyTorch C++ API, by following the instructions at https://pytorch.org.
@@ -64,6 +65,30 @@ and that `NN_BUILD_CUDA_LIB` is selected.
 10. Use the build system you selected to build and install the plugin.  For example, if you
 selected Unix Makefiles, type `make install` to install the plugin, and `make PythonInstall` to
 install the Python wrapper.
+
+
+### Windows
+pytorch must come from offical channel and must be 2.0.1 or older:
+```bat
+conda install pytorch=2.0.1 -c pytorch
+```
+
+use this .bat script
+```bat
+
+mkdir build
+cd build
+
+cmake .. -G Ninja -DCMAKE_INSTALL_PREFIX="%CONDA_PREFIX%\Library" -DTorch_DIR="%CONDA_PREFIX%\Lib\site-packages\torch\share\cmake\Torch" -DOPENMM_DIR="%CONDA_PREFIX%\Library" -DNN_BUILD_PYTHON_WRAPPERS=ON
+
+@REM check things with the config
+ccmake ..
+
+cmake --build .
+cmake --install .
+cmake --build . -- PythonInstall
+
+```
 
 Using the OpenMM PyTorch plugin
 ===============================

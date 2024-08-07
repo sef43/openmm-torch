@@ -18,10 +18,10 @@ if platform.system() == 'Darwin':
 
 extension = Extension(name='_openmmtorch',
                       sources=['TorchPluginWrapper.cpp'],
-                      libraries=['OpenMM', 'OpenMMTorch'],
+                      libraries=['OpenMM', 'OpenMMTorch','c10', 'torch', 'torch_cpu'],
                       include_dirs=[os.path.join(openmm_dir, 'include'), nn_plugin_header_dir] + torch_include_dirs,
-                      library_dirs=[os.path.join(openmm_dir, 'lib'), nn_plugin_library_dir],
-                      runtime_library_dirs=[os.path.join(openmm_dir, 'lib')],
+                      library_dirs=[os.path.join(openmm_dir, 'lib'), nn_plugin_library_dir, torch_dir],
+                    #   runtime_library_dirs=[os.path.join(openmm_dir, 'lib')],
                       extra_compile_args=extra_compile_args,
                       extra_link_args=extra_link_args
                      )

@@ -1,3 +1,21 @@
+%pythonbegin %{
+import sys
+if sys.platform == 'win32':
+    import os
+    import torch
+    import openmm
+    openmmtorch_library_path = openmm.version.openmm_library_path
+
+    _path = os.environ['PATH']
+    os.environ['PATH'] = '%(lib)s;%(lib)s\plugins;%(path)s' % {
+        'lib': openmmtorch_library_path, 'path': _path}
+
+    os.add_dll_directory(openmmtorch_library_path)
+
+%}
+
+
+
 %module openmmtorch
 
 %include "factory.i"
@@ -16,6 +34,9 @@
 #include <torch/csrc/jit/python/module_python.h>
 #include <torch/csrc/jit/serialization/import.h>
 %}
+
+
+
 
 /*
  * Convert C++ exceptions to Python exceptions.
