@@ -70,8 +70,11 @@ install the Python wrapper.
 ### Windows
 pytorch must come from offical channel and must be 2.0.1 or older:
 ```bat
-conda install pytorch=2.0.1 -c pytorch
+conda install pytorch==2.0.1  pytorch-cuda=11.8 -c pytorch -c nvidia
 ```
+only tested with cudatoolkit=11.8
+need to use vscodetools 2019: https://aka.ms/vs/16/release/vs_BuildTools.exe
+(2022 does not like cuda 11.8)
 
 use this .bat script
 ```bat
