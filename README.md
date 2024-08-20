@@ -75,6 +75,7 @@ conda install pytorch==2.0.1  pytorch-cuda=11.8 -c pytorch -c nvidia
 only tested with cudatoolkit=11.8
 need to use vscodetools 2019: https://aka.ms/vs/16/release/vs_BuildTools.exe
 (2022 does not like cuda 11.8)
+might also need this: https://anaconda.org/conda-forge/pthreads-win32
 
 use this .bat script
 ```bat
@@ -89,6 +90,7 @@ ccmake ..
 
 cmake --build .
 cmake --install .
+@REM manually fix setup.py torch_include_dirs line
 cmake --build . -- PythonInstall
 
 ```
